@@ -10,8 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   miFormulario: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    email: ['test1@test.com', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
 
   constructor(
@@ -24,8 +24,12 @@ export class LoginComponent {
     console.log(this.miFormulario.value);
     const { email, password } = this.miFormulario.value;
 
-    this.authService.login(email, password).subscribe((resp) => {
-      console.log(resp);
+    this.authService.login(email, password).subscribe((ok) => {
+      if (ok) {
+        this.router.navigateByUrl('/dashboard');
+      } else {
+        // TODO: mostrar mensaje de error
+      }
     });
     // this.router.navigateByUrl('/dashboard');
   }
