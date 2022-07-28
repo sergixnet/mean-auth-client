@@ -22,6 +22,8 @@ export class LoginComponent {
   ) {}
 
   login() {
+    // this.authService.validarToken().subscribe(console.log)
+
     console.log(this.miFormulario.value);
     const { email, password } = this.miFormulario.value;
 
@@ -32,6 +34,5 @@ export class LoginComponent {
         Swal.fire('Error', ok, 'error');
       }
     });
-    // this.router.navigateByUrl('/dashboard');
   }
 }
